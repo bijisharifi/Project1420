@@ -61,7 +61,10 @@ def remove(root: Node, key: int)->Node:
     if root is None: #shouldnt ever happen
         return root
     elif root.key == key:
-        return None
+        if root.leftchild is None:
+            return root.rightchild
+        else:
+            return root.leftchild
     elif key < root.key:
         root.leftchild = remove(root.leftchild, key)
         return root
