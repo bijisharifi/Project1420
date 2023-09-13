@@ -57,7 +57,9 @@ def minNode(root: Node)-> Node:
 
 
 
-def remove(root: Node, key: int)-> Node:
+
+
+"""def remove(root: Node, key: int)-> Node:
     if root is None:
         return root
     elif key < root.key:
@@ -75,7 +77,17 @@ def remove(root: Node, key: int)-> Node:
             root.keycount = successor.keycount
             root.rightchild = remove(root.rightchild, root.key)
 
+        return root"""
+
+def remove(root: Node, key: int)-> Node:
+    if root is None:
         return root
+    elif key < root.key:
+        root.leftchild = remove(root.leftchild, key)
+    elif key > root.key:
+        root.rightchild = remove(root.rightchild, key)
+    else:
+        return root.rightchild
 
 
     
@@ -91,7 +103,7 @@ def remove(root: Node, key: int)-> Node:
 # If the key is not in the tree, do nothing.
 # If the key is in the tree, decrement its key count. If the keycount goes to 0, remove the key.
 # When replacement is necessary, use the inorder successor.
-def delete(root: Node, key: int) -> Node:
+"""def delete(root: Node, key: int) -> Node:
     if root is None:
         return root
 
@@ -104,7 +116,26 @@ def delete(root: Node, key: int) -> Node:
             root.keycount -= 1
         else:
             root = remove(root, key)
+    return root"""
+
+def delete(root: Node, key: int)-> Node:
+    if root is None:
+        return root
+    elif key < root.key:
+        root.leftchild = delete(root.leftchild, key)
+    elif key > root.key:
+        root.rightchild = delete(root.rightchild, key)
+    else:
+        if root.keycount > 1:
+            root.keycount -= 1
+        else:
+            successor = minNode(root.rightchild)
+            root.key = successor.key
+            root.keycount = successor.keycount
+            root.rightchild = remove(root.rightchild, root.key)
     return root
+
+    
 
 # For the tree rooted at root and the key given:
 # Calculate the list of keys on the path from the root towards the search key.
