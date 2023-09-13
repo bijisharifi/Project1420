@@ -110,7 +110,7 @@ def minNode(root: Node)-> Node:
 def delete(root: Node, key: int) -> Node:
     if root is None:
         return root
-    elif key < root.key:
+    if key < root.key:
         root.leftchild = delete(root.leftchild, key)
     elif key > root.key:
         root.rightchild = delete(root.rightchild, key)
@@ -129,7 +129,7 @@ def delete(root: Node, key: int) -> Node:
                 successor.keycount = 1
                 root.rightchild = delete(root.rightchild, successor.key)
         
-        return root
+    return root
 
 
 
