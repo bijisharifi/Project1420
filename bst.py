@@ -57,7 +57,7 @@ def minNode(root: Node)-> Node:
 
 
 
-def remove(root: Node, key: int)->Node:
+"""def remove(root: Node, key: int)->Node:
     if root is None: #shouldnt ever happen
         return root
     elif root.key == key:
@@ -70,7 +70,31 @@ def remove(root: Node, key: int)->Node:
         return root
     else:
         root.rightchild = remove(root.rightchild, key)
+        return root """
+
+
+def remove(root: Node, key: int)-> Node:
+    if root is None:
         return root
+    elif key < root.key:
+        root.leftchild = remove(root.leftchild, key)
+    elif key > root.key:
+        root.rightchild = remove(root.rightchild, key)
+    else:
+        if root.leftchild is None:
+            return root.rightchild
+        elif root.rightchild is None:
+            return root.leftchild
+        else:
+            successor = minNode(root.rightchild)
+            root.key = successor.key
+            root.keycount = successor.keycount
+            root.rightchild = remove(root.rightchild, root.key)
+
+        return root
+
+
+    
 
     
 
@@ -87,25 +111,16 @@ def delete(root: Node, key: int) -> Node:
     if root is None:
         return root
 
-    elif root.key == key:
+    if key < root.key:
+        root.leftchild = delete(root.leftchild, key)
+    elif key > root.key:
+        root.rightchild = delete(root.rightchild, key)
+    else:
         if root.keycount > 1:
             root.keycount -= 1
-        elif root.leftchild is None:
-            return root.rightchild
-        elif root.rightchild is None:
-            return root.leftchild
         else:
-            
-            root = minNode(root.rightchild)
-            
-            root.rightchild = remove(root.rightchild, root.key)
-    
-    elif key < root.key:
-        delete(root.leftchild, key) 
-    else:
-        delete(root.rightchild, key)
-        
-        return root
+            remove(root, key)
+    return root
 
 # For the tree rooted at root and the key given:
 # Calculate the list of keys on the path from the root towards the search key.
