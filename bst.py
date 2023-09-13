@@ -57,22 +57,6 @@ def minNode(root: Node)-> Node:
 
 
 
-"""def remove(root: Node, key: int)->Node:
-    if root is None: #shouldnt ever happen
-        return root
-    elif root.key == key:
-        if root.leftchild is None:
-            return root.rightchild
-        else:
-            return root.leftchild
-    elif key < root.key:
-        root.leftchild = remove(root.leftchild, key)
-        return root
-    else:
-        root.rightchild = remove(root.rightchild, key)
-        return root """
-
-
 def remove(root: Node, key: int)-> Node:
     if root is None:
         return root
@@ -119,7 +103,7 @@ def delete(root: Node, key: int) -> Node:
         if root.keycount > 1:
             root.keycount -= 1
         else:
-            remove(root, key)
+            root = remove(root, key)
     return root
 
 # For the tree rooted at root and the key given:
