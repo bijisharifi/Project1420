@@ -132,10 +132,7 @@ def search(root: Node, search_key: int) -> str:
     return json.dumps(loclist, indent=2)
 
 
-'''root = Node(3, 1)
-root = insert(root, 2)
-print(search(root, 2))
-print("hello")'''
+
 
     
 
@@ -144,9 +141,20 @@ print("hello")'''
 # For the tree rooted at root, find the preorder traversal.
 # Return the json.dumps of the list with indent=2.
 def preorder(root: Node) -> str:
-    # YOUR CODE GOES HERE.
-    # Then tweak the next line so it uses your list rather than None.
-    return json.dumps(None)
+    
+    if root is None:
+        return json.dumps([], indent=2)
+    
+    loclist = []
+    loclist.append(root.key)
+    left_subtree = json.loads(preorder(root.leftchild))
+    loclist.extend(left_subtree)
+    right_subtree = json.loads(preorder(root.rightchild))
+    loclist.extend(right_subtree)
+
+
+
+    return json.dumps(loclist, indent=2)
 
 # For the tree rooted at root, find the inorder traversal.
 # Return the json.dumps of the list with indent=2.
