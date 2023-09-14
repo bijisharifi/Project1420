@@ -176,9 +176,18 @@ def inorder(root: Node) -> str:
 # For the tree rooted at root, find the postorder traversal.
 # Return the json.dumps of the list with indent=2.
 def postorder(root: Node) -> str:
-    # YOUR CODE GOES HERE.
-    # Then tweak the next line so it uses your list rather than None.
-    return json.dumps(None)
+    
+    if root is None:
+        return json.dumps([], indent=2)
+    
+    loclist = []
+    left_subtree = json.loads(postorder(root.leftchild))
+    loclist.extend(left_subtree)
+    right_subtree = json.loads(postorder(root.rightchild))
+    loclist.extend(right_subtree)
+    loclist.append(root.key)
+
+    return json.dumps(loclist, indent=2)
 
 # For the tree rooted at root, find the BFT traversal (go left-to-right).
 # Return the json.dumps of the list with indent=2.
