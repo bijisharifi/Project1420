@@ -127,7 +127,7 @@ def search(root: Node, search_key: int) -> str:
         res = json.loads(search(root.leftchild, search_key))
 
     if res:
-        loclist.append(res)
+        loclist.extend(res)
     
     return json.dumps(loclist, indent=2)
 
