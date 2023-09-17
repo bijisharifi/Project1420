@@ -195,7 +195,7 @@ def postorder(root: Node) -> str:
 def bft(root: Node) -> str:
     
     if root is None:
-        return json.dumps(None)
+        return json.dumps([], indent=2)
     
     res = []
     queue: deque[Node] = deque()
@@ -205,10 +205,10 @@ def bft(root: Node) -> str:
         node = queue.popleft()
         res.append(node.key)
 
-        if node.left:
+        if node.leftchild:
             queue.append(node.leftchild)
 
-        if node.right:
+        if node.rightchild:
             queue.append(node.rightchild)
 
 
