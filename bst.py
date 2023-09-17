@@ -1,5 +1,6 @@
 import json
 from typing import List
+from collections import deque
 
 # DO NOT MODIFY THIS CLASS!
 class Node():
@@ -192,7 +193,27 @@ def postorder(root: Node) -> str:
 # For the tree rooted at root, find the BFT traversal (go left-to-right).
 # Return the json.dumps of the list with indent=2.
 def bft(root: Node) -> str:
-    # YOUR CODE GOES HERE.
-    # Then tweak the next line so it uses your list rather than None.
-    return json.dumps(None)
+    
+    if root is None:
+        return json.dumps(None)
+    
+    res = []
+    queue: deque[Node] = deque()
+    queue.append(root)
+
+    while queue:
+        node = queue.popleft()
+        res.append(node.key)
+
+        if node.left:
+            queue.append(node.leftchild)
+
+        if node.right:
+            queue.append(node.rightchild)
+
+
+
+    
+
+    return json.dumps(res, indent=2)
 
